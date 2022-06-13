@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/rec">
+        <file>Img/icons8-выход-50.png</file>
+        <file>Img/icons8-о-нас-64.png</file>
+        <file>Img/icons8-create-50.png</file>
+    </qresource>
+</RCC>
