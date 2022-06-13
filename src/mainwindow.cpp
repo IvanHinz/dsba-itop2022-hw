@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
      QObject::connect(ui->deleteRowButton, SIGNAL(clicked()), this, SLOT(deleteRowsSlot()));
      QObject::connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addRowSlot()));
      QObject::connect(ui->filterButton, SIGNAL(clicked()), this, SLOT(filterRowsSlot()));
+     QObject::connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveFile()));
 
      mainTable = new MainTable(this);
      ui->tableView->setModel(mainTable);
@@ -47,7 +48,7 @@ void MainWindow::loadFile()
 
     mainTable = new MainTable(this);
     QString fileName = QFileDialog::getOpenFileName(this, "Open File",
-                                                    ".../",//-/Users/ivanorlov/Downloads/stolenvehicles.csv
+                                                    ".../",//your path
                                                     "Data (*.csv)");
     mainTable->fillDataTableFromFile(fileName, elem_id);
 
@@ -59,6 +60,9 @@ void MainWindow::deleteRowsSlot(){
     if (d.exec() == QDialog::Accepted)
     {
         mainTable->deleteRows(d.getStartIndex(), d.getNumber(), d.getAccepted());
+        if (!mainTable->check_for_intervals){
+            QMessageBox::information(this, "Intervals", "Invalid Interval");
+        }
     }
 }
 
@@ -94,4 +98,13 @@ void MainWindow::filterRowsSlot(){
        incorrectly*/
        mainTable->setTable();
     }
+}
+
+void MainWindow::saveFile()
+{
+    //you will save it to new .csv file
+    QString fileName = QFileDialog::getSaveFileName(this, "Open File",
+                                                  ".../.csv",//probably your path
+                                                  "Data (*.csv)");
+    mainTable->saveDataTableToFile(fileName);
 }
