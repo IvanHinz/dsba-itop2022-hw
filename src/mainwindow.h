@@ -33,6 +33,7 @@ private slots:
     void deleteRowsSlot();
     void addRowSlot();
     void filterRowsSlot();
+    void saveFile();
 
 private:
     Ui::MainWindow *ui;

@@ -16,7 +16,7 @@ About::~About()
 
 //clicking - to get information about stud.number
 void About::getInformation(){
-    QMessageBox::information(this, "Information", "Author Ivan Orlov 213-2");
+    QMessageBox::information(this, "Information", "Student ID - 112");
 }
 
 void About::paintEvent(QPaintEvent*){

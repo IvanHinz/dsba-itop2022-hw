@@ -1,5 +1,6 @@
 #include "maintable.h"
 #include <QFile>
+#include <QMessageBox>
 
 MainTable::MainTable(QObject *parent)
     : QAbstractTableModel(parent)
@@ -165,6 +166,9 @@ bool MainTable::deleteRows(const uint& start_ind,const uint& last_ind, const boo
 
         endRemoveRows();
     }
+    else{
+        check_for_intervals = false;
+    }
     return true;
 }
 
@@ -209,4 +213,47 @@ void MainTable::setTable(){
         TableAfterDeleting.append(dataTable[IndicesToHold[i]]);
     }
     dataTable = TableAfterDeleting;
+}
+
+//for copying datatable to another file
+void MainTable::saveDataTableToFile(QString path)
+{
+    QFile outputFile(path);
+    outputFile.open(QFile::WriteOnly | QFile::Text);
+    QTextStream outputStream(&outputFile);
+
+    bool first = true;
+    for (QString& item : headerList){
+        if (first)
+        {
+            outputStream << item;
+            first = false;
+        }
+        else
+        {
+            outputStream << ",";
+            outputStream << item;
+        }
+    }
+    outputStream << "\n";
+
+    for (QList<QString>& row: dataTable)
+    {
+        bool first = true;
+        for (QString&row : row){
+            if (first)
+            {
+                outputStream <<  row;
+                first = false;
+            }
+            else
+            {
+                outputStream << ",";
+                outputStream <<  row;
+            }
+        }
+        outputStream << "\n";
+     }
+
+     outputFile.close();
 }

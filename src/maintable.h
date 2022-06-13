@@ -50,6 +50,9 @@ public:
     bool removeRow(int idx);
     void setTable();
     void setIndicesToHold();
+    void saveDataTableToFile(QString path);
+
+    bool check_for_intervals = true;
 
 private:
     QList<QList<QString>> dataTable;
