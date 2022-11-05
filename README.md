@@ -1,3 +1,2 @@
-# dsba-itop2022-hw
-BigHW(DSBA)
-Gui Application for work with stolen vehicles dataset
+# gui qt table
+Gui app for work with stolen vehicles dataset
